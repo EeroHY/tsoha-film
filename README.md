@@ -12,7 +12,7 @@ Planned features:
 - Registered users can comment on other users' reviews
 - Admin user can remove reviews and comments  
 
-###Usage:
+### Usage:
 You need to have PostgreSQL up and running to use this app.
 1. Clone this repository and `cd` into it.
 2. Create a python venv and install dependencies:
