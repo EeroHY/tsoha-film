@@ -9,25 +9,30 @@ from db import db
 def index():
     return render_template("index.html")
 
-@app.route("/login",methods=["POST"])
+@app.route("/login")
 def login():
+    return render_template("login.html")
+
+@app.route("/login_notfound")
+def login_notfound():
+    return render_template("login.html", notfound=True)
+
+@app.route("/login_user",methods=["POST"])
+def login_user():
     username = request.form["username"]
     password = request.form["password"]
     sql = text("SELECT id, password FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()    
     if not user:
-        session["notfound"] = username
-        return redirect("/")
+        return redirect("/login_notfound")
     else:
         hash_value = user.password
         if check_password_hash(hash_value, password):
-            del session["notfound"] 
             session["username"] = username
             return redirect("/")
         else:
-            session["notfound"] = username
-            return redirect("/")
+            return redirect("/login_notfound")
 
 
 @app.route("/logout")
@@ -36,11 +41,11 @@ def logout():
     return redirect("/")
 
 
-@app.route("/newUser")
-def new():
-    return render_template("newUser.html")
+@app.route("/register")
+def register():
+    return render_template("register.html")
 
-@app.route("/createUser", methods=["POST"])
+@app.route("/create_user", methods=["POST"])
 def create():
     username = request.form["username"]
     password = request.form["password"]

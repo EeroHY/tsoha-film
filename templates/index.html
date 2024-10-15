@@ -1,15 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
 {% if session.username %}
 <p>Logged in as {{ session.username }}</p>
 <a href="/logout">Log out</a>
 {% else %}
-{% if session.notfound %}
-<i>User not found<i><br>
+<p>You need to log in to use the app</p>
 {% endif %}
-<form action="/login" method="POST">
-<p>Username:<br>
-<input type="text" name="username"></p>
-<p>Password:<br>
-<input type="password" name="password"></p>
-<input type="submit" value="Log in">
-</form>
-{% endif %}
+
+{% endblock %}
