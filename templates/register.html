@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 {% block title %}Register{% endblock %}
 {% block content %}
-<form action="/create_user" method="POST">
+<form action="/register" method="POST">
     <p>Username:<br>
     <input type="text" name="username"></p>
     <p>Password:<br>
-    <input type="text" name="password"></p>
+    <input type="text" name="password1"></p>
+    <p>Password again:<br>
+    <input type="text" name="password2"></p>
     <input type="submit" value="Create user">
 </form>
 {% endblock %}    
