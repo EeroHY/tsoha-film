@@ -1,0 +1,40 @@
+body {
+  margin: auto;
+  max-width: 45em;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  background: rgb(199, 194, 194);
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+  width: 30%;
+  min-width: 25em;
+  margin: 0 auto;
+  padding-top: 25px;
+}
+
+.header {
+  background: rgb(76, 141, 98);
+  font-weight: bold;
+  padding: 2em 1em;
+  font-size: 2em;
+}
+
+form {
+  max-width: 15em;
+  grid-template-columns: 5em 10em;
+  grid-row-gap: .3em;
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+}
+
+input[type="submit"] { 
+  padding:5px;
+  text-align: center;
+  background: rgb(76, 141, 98);
+}
+
+input[type="submit"]:hover {
+  background: rgb(49, 90, 63);
+  color: white;
+}
