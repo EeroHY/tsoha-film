@@ -12,8 +12,16 @@
             <a href="/">Home</a>
             <a href="/login">Login</a>
             <a href="/register">Register</a>
+            <a href="/review">Reviews</a>
             <hr>
+            {% if session.user_id %}
+             <!-- This is private -->
             {% block content %}{% endblock %}
+            {% else %}
+            <p>You need to log in to use the app</p>
+            {% endif %}     
+            <!-- This is public -->
+            {% block public %}{% endblock %} 
             <hr>
         </div>
 </body>

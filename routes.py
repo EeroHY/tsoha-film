@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, session
 from os import getenv
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
-import users
+import users, reviews
 
 @app.route("/")
 def index():
@@ -47,11 +47,16 @@ def register():
 def profile():
     return render_template("profile.html")
 
-#@app.route("/edit_user_name", methods=["POST"])
-#def edit_user_name():
-#    if request.method == "POST":
-#        username = request.form["username"]
-#        if users.register(username):
-#            return redirect("/profile")
-#        else:
-#            return render_template("error.html", message="Failed to change username")
+@app.route("/review", methods=["GET", "POST"])
+def review():
+    if request.method == "GET":
+        list = reviews.get_list()
+        print(list)
+        return render_template("reviews.html", reviews=list)
+    if request.method == "POST":
+        text = request.form["review"]
+        stars = request.form["stars"]
+        if reviews.add(users.user_id(), text, stars):
+            return redirect("/review")
+        else:
+            return render_template("error.html", message="Failed to add review")

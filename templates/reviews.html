@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Reviews{% endblock %}
+{% block content %}
+{% for review in reviews %}
+<i>Stars:</i> {{ review[0] }}
+<p>
+<i>Review:</i> {{ review[1] }}
+<p>
+<i>By user:</i> {{ review[2] }}
+<p>    
+<hr>
+{% endfor %}
+<hr>
+<form action="/review" method="POST">
+    <p>Review:<br>
+    <input type="text" name="review"></p>
+    <p>Stars:<br>
+    <input type="number" name="stars" min="1" max="5"></p>
+    <input type="submit" value="Create review">
+</form>
+{% endblock %}

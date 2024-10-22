@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}Login{% endblock %}
-{% block content %}
+{% block public %}
 {% if notfound %}
 <i>User not found<i><br>
 {% endif %}
@@ -11,4 +11,4 @@
 <input type="password" name="password"></p>
 <input id="login" type="submit" value="Log in">
 </form>
-{% endblock %}    
+{% endblock %}   
