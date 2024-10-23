@@ -16,6 +16,8 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        if not username or not password:
+            return render_template("error.html", message="Form must be filled")
         if users.login(username, password):
             return redirect("/")
         else:
@@ -35,7 +37,8 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
-
+        if not username or not password1 or not password2:
+            return render_template("error.html", message="Form must be filled")
         if password1 != password2:
             return render_template("error.html", message="Passwords are different")
         if users.register(username, password1):
@@ -56,6 +59,8 @@ def review():
     if request.method == "POST":
         text = request.form["review"]
         stars = request.form["stars"]
+        if not text or not stars:
+            return render_template("error.html", message="Form must be filled")
         if reviews.add(users.user_id(), text, stars):
             return redirect("/review")
         else:

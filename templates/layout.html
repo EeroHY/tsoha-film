@@ -1,27 +1,33 @@
 <!doctype html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <title>Tsoha-film - {% block title %}{% endblock %}</title>
 </head>
 <body>   
-        <div class="header">
-            <h1>Tsoha-film </h1>
-        </div>
-        <div class="content"></div>
-            <a href="/">Home</a>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-            <a href="/review">Reviews</a>
-            <hr>
-            {% if session.user_id %}
-             <!-- This is private -->
-            {% block content %}{% endblock %}
-            {% else %}
-            <p>You need to log in to use the app</p>
-            {% endif %}     
-            <!-- This is public -->
-            {% block public %}{% endblock %} 
-            <hr>
-        </div>
+    <div class="menu">
+        <a href="/">Home</a>
+        {% if session.user_id %}
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/login">Login</a>
+        {% endif %}  
+        <a href="/register">Register</a>
+        <a href="/review">Reviews</a>
+    </div>
+    <div class="header">
+        <h1>Tsoha-film </h1>
+        <p>Film reviews </p>
+    </div>
+          
+    <div class="content">              
+        <hr>
+        {% if session.user_id %}
+        {% block content %}{% endblock %}
+        {% else %}
+        <p>You need to log in to use the app</p>
+        {% endif %}     
+        {% block public %}{% endblock %} 
+        <hr>
+    </div>
 </body>

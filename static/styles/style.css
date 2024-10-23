@@ -1,7 +1,7 @@
 body {
   margin: auto;
   max-width: 45em;
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Helvetica', sans-serif;
   background: rgb(199, 194, 194);
   border-radius: 25px;
   border: 2px solid black;
@@ -15,8 +15,20 @@ body {
 .header {
   background: rgb(76, 141, 98);
   font-weight: bold;
-  padding: 2em 1em;
+  font-family: 'Impact', monospace;
+  padding: 1em 1em;
   font-size: 2em;
+  border-radius: 25px;
+  border: 2px solid black;
+}
+
+.menu {
+  background: rgb(76, 141, 98);
+  padding: 1em 1em;
+  font-size: 2em;
+  font-family: 'Impact', monospace;
+  border-radius: 25px;
+  border: 2px solid black;
 }
 
 form {

@@ -21,7 +21,7 @@ def logout():
     del session["user_id"]
 
 def register(username, password):
-
+    
     hash_value = generate_password_hash(password)
     try:   
         sql = text("INSERT INTO users (username, password) VALUES (:username, :password)")

@@ -1,13 +1,14 @@
 {% extends "layout.html" %}
 {% block title %}Register{% endblock %}
 {% block public %}
-<form action="/register" method="POST">
+<form name="register" action="/register" onsubmit="return validateForm()" method="POST">
     <p>Username:<br>
-    <input type="text" name="username"></p>
+    <input type="text" name="username" required></p>
     <p>Password:<br>
-    <input type="text" name="password1"></p>
+    <input type="text" name="password1" required></p>
     <p>Password again:<br>
-    <input type="text" name="password2"></p>
+    <input type="text" name="password2" required></p>
     <input type="submit" value="Create user">
 </form>
 {% endblock %}    
+
