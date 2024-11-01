@@ -57,11 +57,12 @@ def review():
         print(list)
         return render_template("reviews.html", reviews=list)
     if request.method == "POST":
-        text = request.form["review"]
+        title = request.form["title"]
+        review = request.form["review"]
         stars = request.form["stars"]
-        if not text or not stars:
+        if not title or not text or not stars:
             return render_template("error.html", message="Form must be filled")
-        if reviews.add(users.user_id(), text, stars):
+        if reviews.add(users.user_id(), title, review, stars):
             return redirect("/review")
         else:
             return render_template("error.html", message="Failed to add review")

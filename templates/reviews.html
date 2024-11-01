@@ -3,6 +3,9 @@
 
 {% block content %}
 <form action="/review" method="POST">
+    <h3>Add review:</h3>
+    <p>Title:<br>
+    <input type="text" name="title" required></p>
     <p>Review:<br>
     <input type="text" name="review" required></p>
     <p>Stars:<br>
@@ -14,11 +17,13 @@
 {% block public %}
 <hr>
 {% for review in reviews %}
-<i>Stars:</i> {{ review[0] }}
+<i>Film:</i> {{ review[1] }}
 <p>
-<i>Review:</i> {{ review[1] }}
+<i>Stars:</i> {{ review[2] }}
 <p>
-<i>By user:</i> {{ review[2] }}
+<i>Review:</i> {{ review[3] }}
+<p>
+<i>By user:</i> {{ review[0] }}
 <p>    
 <hr>
 {% endfor %}

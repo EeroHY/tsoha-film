@@ -1,12 +1,9 @@
 body {
   margin: auto;
-  max-width: 45em;
   font-family: 'Helvetica', sans-serif;
+  color:rgb(34, 34, 34);
   background: rgb(199, 194, 194);
-  border-radius: 25px;
-  border: 2px solid black;
-  padding: 20px;
-  width: 30%;
+  width: 38%;
   min-width: 25em;
   margin: 0 auto;
   padding-top: 25px;
@@ -20,15 +17,36 @@ body {
   font-size: 2em;
   border-radius: 25px;
   border: 2px solid black;
+  line-height: 1em;
 }
 
-.menu {
-  background: rgb(76, 141, 98);
-  padding: 1em 1em;
-  font-size: 2em;
-  font-family: 'Impact', monospace;
+.header .menu {
+  width: fit-content;
+  padding: 0px;
   border-radius: 25px;
   border: 2px solid black;
+}
+
+.header .menu a {
+  color:rgb(50, 50, 50);
+  border: none;
+  background: rgb(76, 141, 98);
+  font-family: 'Impact', monospace;
+  font-weight: bold;
+  font-size: 1em;
+  border-radius: 25px;
+  border: 2px solid rgb(76, 141, 98);;
+  padding: 20px;
+  text-decoration: none
+}
+
+.header .menu a:hover {
+  background: rgb(49, 90, 63);
+  color: white;
+}
+
+.button {
+    display: inline-block;
 }
 
 form {
