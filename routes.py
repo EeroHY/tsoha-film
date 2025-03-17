@@ -1,13 +1,15 @@
 from app import app
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, flash
 from os import getenv
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
 import users, reviews
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -29,6 +31,7 @@ def logout():
     users.logout()
     return redirect("/")
 
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
@@ -44,11 +47,13 @@ def register():
         if users.register(username, password1):
             return redirect("/")
         else:
-            return render_template("error.html", message="Failed to register user")
+            return render_template("register.html")
+
 
 @app.route("/profile", methods=["GET"])
 def profile():
     return render_template("profile.html")
+
 
 @app.route("/review", methods=["GET", "POST"])
 def review():
