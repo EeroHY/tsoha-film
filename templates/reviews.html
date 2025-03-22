@@ -6,8 +6,8 @@
     <h3>Add review:</h3>
     <p>Title:<br>
     <input type="text" name="title" required></p>
-    <p>Review:<br>
-    <input type="text" name="review" required></p>
+    <p>Review:<br></p>
+    <textarea name="review" required></textarea>
     <p>Stars:<br>
     <input type="number" name="stars" min="1" max="5" required></p>
     <input type="submit" value="Create review">
@@ -17,14 +17,35 @@
 {% block public %}
 <hr>
 {% for review in reviews %}
-<i>Film:</i> {{ review[1] }}
+<i>Film:</i> {{ review[2] }}
 <p>
-<i>Stars:</i> {{ review[2] }}
+<i>Stars:</i> {{ review[3] }}
 <p>
-<i>Review:</i> {{ review[3] }}
+<i>Review:</i> {{ review[4] }}
 <p>
-<i>By user:</i> {{ review[0] }}
+<i>By user:</i> {{ review[1] }}
 <p>    
+    
+<div class="comments">
+{% for comment in comments %}    
 <hr>
+{% if comment.review_id == review.id %}
+<i>Comment by:</i> {{ comment[0] }}
+<p>
+<i>Comment:</i> {{ comment[2] }}
+<p>  
+{% endif %}
 {% endfor %}
+<hr>
+{% if session.user_id %}
+<form action="/comment" method="POST">
+    <p>Add comment:<br></p>
+    <textarea name="comment" required></textarea>
+    <input name="review_id" type="hidden" value= {{ review.id }}>
+    <input type="submit" value="Post comment">
+</form>
+{% endif %}
+</div>
+{% endfor %}
+
 {% endblock %}

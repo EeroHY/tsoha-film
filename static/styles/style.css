@@ -50,12 +50,17 @@ body {
 }
 
 form {
-  max-width: 15em;
+  max-width: 35em;
   grid-template-columns: 5em 10em;
   grid-row-gap: .3em;
   border-radius: 25px;
   border: 2px solid black;
   padding: 20px;
+}
+
+input[type="text"] { 
+  width: 95%;
+  padding:5px;
 }
 
 input[type="submit"] { 
@@ -67,4 +72,11 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background: rgb(49, 90, 63);
   color: white;
+}
+
+
+.comments {
+  padding: 10px;
+  border-radius: 25px;
+  border: 2px solid black;
 }

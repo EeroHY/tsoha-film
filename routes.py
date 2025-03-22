@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, session, flash
 from os import getenv
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
-import users, reviews
+import users, reviews, comments
 
 
 @app.route("/")
@@ -58,9 +58,10 @@ def profile():
 @app.route("/review", methods=["GET", "POST"])
 def review():
     if request.method == "GET":
-        list = reviews.get_list()
-        print(list)
-        return render_template("reviews.html", reviews=list)
+        reviews_list = reviews.get_list()
+        comments_list = comments.get_list()    
+        return render_template("reviews.html", reviews=reviews_list, comments=comments_list)
+
     if request.method == "POST":
         title = request.form["title"]
         review = request.form["review"]
@@ -71,3 +72,20 @@ def review():
             return redirect("/review")
         else:
             return render_template("error.html", message="Failed to add review")
+
+@app.route("/comment", methods=["POST"])
+def comment():
+    try:
+        review_id = request.form["review_id"]
+        comment = request.form["comment"]
+        print(review_id)
+        if not comment:
+            raise Exception("Form must be filled") 
+        if comments.add(users.user_id(), review_id, comment):
+            return redirect("/review")
+        else:
+            raise Exception("Failed to add comment") 
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+    return redirect("/review")
