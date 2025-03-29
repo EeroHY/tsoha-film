@@ -1,9 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}Login{% endblock %}
 {% block public %}
-{% if notfound %}
-<i>User not found<i><br>
-{% endif %}
 <form action="/login" method="POST">
 <p>Username:<br>
 <input type="text" name="username" required></p>
