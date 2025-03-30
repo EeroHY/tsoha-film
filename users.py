@@ -5,18 +5,22 @@ from sqlalchemy.sql import text
 
 
 def login(username, password):
-    sql = text("SELECT id, password FROM users WHERE username=:username")
-    result = db.session.execute(sql, {"username": username})
-    user = result.fetchone()
-    if not user:
-        return False
-    else:
-        if check_password_hash(user.password, password):
-            session["user_id"] = user.id
-            return True
+    try:
+        sql = text("SELECT id, password FROM users WHERE username=:username")
+        result = db.session.execute(sql, {"username": username})
+        user = result.fetchone()
+        if not user:
+            raise Exception("User doesn't exist")
         else:
-            return False
-
+            if check_password_hash(user.password, password):
+                session["user_id"] = user.id
+                return True
+            else:
+                raise Exception("Wrong password")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return False
 
 def logout():
     del session["user_id"]
@@ -25,8 +29,8 @@ def logout():
 def register(username, password):
     hash_value = generate_password_hash(password)
     try:
-        if (user_exists(username)):
-            raise Exception("User already exists") 
+        if user_exists(username):
+            raise Exception("User already exists")
         sql = text(
             "INSERT INTO users (username, password) VALUES (:username, :password)"
         )
@@ -47,6 +51,7 @@ def user_name(id):
     sql = text("SELECT username FROM users WHERE id=:id")
     result = db.session.execute(sql, {"id": id})
     return result
+
 
 def user_exists(username):
     sql = text("SELECT username FROM users WHERE username=:username")

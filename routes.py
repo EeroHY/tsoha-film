@@ -64,12 +64,16 @@ def profile():
 @app.route("/review", methods=["GET", "POST"])
 def review():
     if request.method == "GET":
-        reviews_list = reviews.get_list()
-        comments_list = comments.get_list()
-        return render_template(
-            "reviews.html", reviews=reviews_list, comments=comments_list
-        )
-
+        try:
+            reviews_list = reviews.get_list()
+            comments_list = comments.get_list()
+            return render_template(
+                "reviews.html", reviews=reviews_list, comments=comments_list
+            )
+        except Exception as error:
+            print(str(error))
+            flash(str(error))
+            return redirect("/")
     if request.method == "POST":
         try:
             title = request.form["title"]
@@ -84,7 +88,7 @@ def review():
         except Exception as error:
             print(str(error))
             flash(str(error))
-        return redirect("/review")
+            return redirect("/review")
 
 
 @app.route("/comment", methods=["POST"])
