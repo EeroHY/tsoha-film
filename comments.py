@@ -1,7 +1,5 @@
 from db import db
 from sqlalchemy.sql import text
-from flask import flash
-
 
 def add(user_id, review_id, comment):
     try:
@@ -12,11 +10,9 @@ def add(user_id, review_id, comment):
             sql, {"user_id": user_id, "review_id": review_id, "comment": comment}
         )
         db.session.commit()
+        return True
     except Exception as error:
-        print(str(error))
-        flash(str(error))
-        return False
-    return True
+        raise error
 
 
 def remove(comment_id):

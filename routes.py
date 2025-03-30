@@ -39,8 +39,9 @@ def logout():
 def register():
     if request.method == "GET":
         return render_template("register.html")
-    try:
-        if request.method == "POST":
+    
+    if request.method == "POST":
+        try:
             username = request.form["username"]
             password1 = request.form["password1"]
             password2 = request.form["password2"]
@@ -49,16 +50,18 @@ def register():
             if password1 != password2:
                 raise Exception("Passwords are different")
             if users.register(username, password1):
-                return redirect("/")
-    except Exception as error:
-        print(str(error))
-        flash(str(error))
-    return render_template("register.html")
+                flash("Register successful! You can now login.")
+                return redirect("/login")
+        except Exception as error:
+            print(str(error))
+            flash(str(error))
+        return render_template("register.html")
 
 
 @app.route("/profile", methods=["GET"])
 def profile():
-    return render_template("profile.html")
+    print(users.get_name(users.get_id()))
+    return render_template("profile.html", username=users.get_name(users.get_id()))
 
 
 @app.route("/review", methods=["GET", "POST"])
@@ -81,7 +84,7 @@ def review():
             stars = request.form["stars"]
             if not title or not text or not stars:
                 raise Exception("Form must be filled")
-            if reviews.add(users.user_id(), title, review, stars):
+            if reviews.add(users.get_id(), title, review, stars):
                 return redirect("/review")
             else:
                 raise Exception("Failed to add review")

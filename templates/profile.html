@@ -1,11 +1,8 @@
 {% extends "layout.html" %}
 {% block title %}Profile{% endblock %}
 {% block content %}
-{% if session.username %}
-<p>Logged in as {{ session.username }}</p>
-<a href="/logout">Log out</a>
-{% else %}
-<p>You need to log in to use the app</p>
+{% if username %}
+<p>Logged in as {{ username }}</p>
 {% endif %}
 <p>Change username:</p>
 <form action="/edit_user_name" method="POST">
