@@ -1,7 +1,7 @@
 body {
   margin: auto;
   font-family: 'Helvetica', sans-serif;
-  color:rgb(34, 34, 34);
+  color: rgb(34, 34, 34);
   background: rgb(199, 194, 194);
   width: 38%;
   min-width: 25em;
@@ -28,14 +28,14 @@ body {
 }
 
 .header .menu a {
-  color:rgb(50, 50, 50);
+  color: rgb(50, 50, 50);
   border: none;
   background: rgb(76, 141, 98);
   font-family: 'Impact', monospace;
   font-weight: bold;
   font-size: 1em;
   border-radius: 25px;
-  border: 2px solid rgb(76, 141, 98);;
+  border: 2px solid rgb(76, 141, 98);
   padding: 20px;
   text-decoration: none
 }
@@ -46,7 +46,7 @@ body {
 }
 
 .button {
-    display: inline-block;
+  display: inline-block;
 }
 
 form {
@@ -58,17 +58,18 @@ form {
   padding: 20px;
 }
 
-input[type="text"] { 
+input[type="text"] {
   width: 95%;
-  padding:5px;
-}
-input[type="password"] { 
-  width: 95%;
-  padding:5px;
+  padding: 5px;
 }
 
-input[type="submit"] { 
-  padding:5px;
+input[type="password"] {
+  width: 95%;
+  padding: 5px;
+}
+
+input[type="submit"] {
+  padding: 5px;
   text-align: center;
   background: rgb(76, 141, 98);
 }
