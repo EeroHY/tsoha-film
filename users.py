@@ -48,7 +48,7 @@ def get_id():
 def get_name(id):
     sql = text("SELECT username FROM users WHERE id=:id")
     result = db.session.execute(sql, {"id": id})
-    row = result.fetchone() 
+    row = result.fetchone()
     if row:
         return row.username
     return None
@@ -61,3 +61,17 @@ def user_exists(username):
     if user:
         return True
     return False
+
+def set_profile_picture(data):
+    sql = text("DELETE FROM images WHERE user_id=:user_id")
+    db.session.execute(sql, {"user_id":get_id()})
+    db.session.commit()
+    sql = text("INSERT INTO images (user_id,data) VALUES (:user_id,:data)")
+    db.session.execute(sql, {"user_id":get_id(), "data":data})
+    db.session.commit()
+
+def get_profile_picture(id):
+    sql = text("SELECT data FROM images WHERE user_id=:id")
+    result = db.session.execute(sql, {"id":id})
+    data = result.fetchone()[0]    
+    return data

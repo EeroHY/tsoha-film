@@ -7,15 +7,25 @@
 <p>Change username:</p>
 <form action="/edit_user_name" method="POST">
     <p>Username:<br>
-    <input type="text" name="username"></p>
+        <input type="text" name="username">
+    </p>
     <input type="submit" value="Change">
 </form>
 
 <p>Change password:</p>
 <form action="/edit_user_password" method="POST">
     <p>Password:<br>
-    <input type="text" name="password"></p>
+        <input type="text" name="password">
+    </p>
     <input type="submit" value="Change">
+</form>
+
+<p>Change profile picture:</p>
+<form action="/picture" method="POST" enctype="multipart/form-data">
+    <p>File:<br>
+        <input type="file" name="file">
+    </p>
+    <input type="submit" value="Send">
 </form>
 
 {% endblock %}

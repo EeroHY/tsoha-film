@@ -16,3 +16,8 @@ CREATE TABLE comments (
     user_id INTEGER REFERENCES users,  
     comment TEXT 
 );
+CREATE TABLE images (
+    id SERIAL PRIMARY KEY, 
+    user_id INTEGER REFERENCES users(id),
+    data BYTEA
+);

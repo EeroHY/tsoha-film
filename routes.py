@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, flash
+from flask import render_template, request, redirect, flash, make_response
 from sqlalchemy.sql import text
 import users, reviews, comments
 
@@ -39,7 +39,7 @@ def logout():
 def register():
     if request.method == "GET":
         return render_template("register.html")
-    
+
     if request.method == "POST":
         try:
             username = request.form["username"]
@@ -56,13 +56,6 @@ def register():
             print(str(error))
             flash(str(error))
         return render_template("register.html")
-
-
-@app.route("/profile", methods=["GET"])
-def profile():
-    print(users.get_name(users.get_id()))
-    return render_template("profile.html", username=users.get_name(users.get_id()))
-
 
 @app.route("/review", methods=["GET", "POST"])
 def review():
@@ -110,3 +103,37 @@ def comment():
         print(str(error))
         flash(str(error))
     return redirect("/review")
+
+
+@app.route("/profile", methods=["GET"])
+def profile():
+    return render_template("profile.html", username=users.get_name(users.get_id()))
+
+
+@app.route("/picture", methods=["POST"])
+def picture():
+    try:
+        file = request.files["file"]
+        name = file.filename
+        if not name.endswith(".jpg"):
+            raise Exception("Invalid filename")
+        data = file.read()
+        if len(data) > 1000*1024:
+            raise Exception("File too big")
+        users.set_profile_picture(data)
+
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+    return redirect("/profile")
+
+@app.route("/show/<int:id>")
+def show(id):
+    try:
+        data = users.get_profile_picture(id)
+        response = make_response(bytes(data))
+        response.headers.set("Content-Type", "image/jpeg")
+        return response
+    except Exception as error:
+        print(str(error))
+        flash(str(error))    
