@@ -13,9 +13,9 @@ Planned features:
 - Admin user can remove reviews and comments  
 
 ### Usage:
-You need to have PostgreSQL up and running to use this app.
+You need to have PostgreSQL up and running to use this app. The included Dockerfile can be used for this, see Docker/Usage.md for more.
 1. Clone this repository and `cd` into it.
-2. Create a python venv and install dependencies:
+2. Create a python venv and install dependencies (note: this app requires Python version 3.12, otherwise it might not work):
 ```
 python3 -m venv venv
 source venv/bin/activate
@@ -25,9 +25,11 @@ pip install -r ./requirements.txt
 ```
 psql < schema.sql
 ```
+Alternatively use the included Dockerfile that does this.
 4. Create a file called `.env` and add the following:
 ```
 DATABASE_URL=postgresql:///tsoha_film
 SECRET_KEY=<SOME SECRET KEY HERE>
 ```
+Again, some differences if you use Docker.
 5. Now the app can be started with `flask run`
