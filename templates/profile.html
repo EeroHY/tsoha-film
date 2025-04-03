@@ -4,32 +4,28 @@
 {% if username %}
 <p>Logged in as {{ username }}</p>
 {% endif %}
-<div class="flex-container">
-    <div class="content-wrap about_content">
-        <p>Change username:</p>
-        <form action="/edit_user_name" method="POST">
-            <p>Username:<br>
-                <input type="text" name="username">
-            </p>
-            <input type="submit" value="Change">
-        </form>
-    </div>
+<div class="form">
+    <p>Change username:</p>
+    <form action="/edit_user_name" method="POST">
+        <p>New username:<br>
+            <input type="text" name="username">
+        </p>
+        <input type="submit" value="Change">
+    </form>
 </div>
 
-<div class="flex-container">
-    <div class="content-wrap about_content">
-        <p>Change password:</p>
-        <form action="/edit_user_password" method="POST">
-            <p>Password:<br>
-                <input type="text" name="password">
-            </p>
-            <input type="submit" value="Change">
-        </form>
-    </div>
+<div class="form">
+    <p>Change password:</p>
+    <form action="/edit_user_password" method="POST">
+        <p>New password:<br>
+            <input type="text" name="password">
+        </p>
+        <input type="submit" value="Change">
+    </form>
 </div>
 
-<div class="flex-container">
-    <div class="content-wrap about_content">
+<div class="flex-container form">
+    <div class="change-picture">
         <p>Change profile picture:</p>
         <form action="/picture" method="POST" enctype="multipart/form-data">
             <p>File:<br>
@@ -39,7 +35,7 @@
         </form>
     </div>
 
-    <div class="about_img_container">
+    <div class="img_container">
         <img src="/image/{{userid}}" style="width:128px;height:128px;" onError="this.src ='/static/images/default.jpg'">
     </div>
 </div>

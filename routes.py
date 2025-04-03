@@ -94,7 +94,7 @@ def comment():
         comment = request.form["comment"]
         if not comment:
             raise Exception("Form must be filled")
-        if comments.add(users.user_id(), review_id, comment):
+        if comments.add(users.get_id(), review_id, comment):
             return redirect("/review")
         else:
             raise Exception("Failed to add comment")

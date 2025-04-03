@@ -18,33 +18,42 @@
 
 {% block public %}
 {% for review in reviews %}
-<div class="review">
-    <i>Film:</i> {{ review[2] }}
-    <p>
-        <i>Stars:</i> {{ review[3] }}
-    <p>
-        <i>Review:</i> {{ review[4] }}
-    <p>
-        <i>By user:</i> {{ review[1] }}
-    <p>
+<div class="flex-container-column">
+    <div class="review">
+        <i>Film:</i> {{ review[2] }}
+        <p>
+            <i>Stars:</i> {{ review[3] }}
+        <p>
+            <i>Review:</i> {{ review[4] }}
+        <p>
+            <i>By user:</i> {{ review[1] }}
+        <p>
 
-    <div class="comments">
-        {% for comment in comments %}
-        {% if comment.review_id == review.id %}
-        <i>Comment by:</i> {{ comment[0] }}
-        <p>
-            <i>Comment:</i> {{ comment[2] }}
-        <p>
+        <div class="comments">
+            <b>Comments</b>
+            {% for comment in comments %}
+            {% if comment.review_id == review.id %}
+            <div class="flex-container-column comment">
+                <div class="flex-container">
+                    <b>Comment by:</b> {{ comment[1] }}
+                    <img src="/image/{{comment[0]}}" style="width:128px;height:128px;"
+                        onError="this.src ='/static/images/default.jpg'">
+                </div>
+                <div>
+                    <b>Comment:</b> {{ comment[3] }}
+                </div>
+            </div>
             {% endif %}
             {% endfor %}
             {% if session.user_id %}
-        <form action="/comment" method="POST">
-            <p>Add comment:<br></p>
-            <textarea name="comment" required></textarea>
-            <input name="review_id" type="hidden" value={{ review.id }}>
-            <input type="submit" value="Post comment">
-        </form>
-        {% endif %}
+            <form action="/comment" method="POST">
+                <p>Add comment:<br></p>
+                <textarea name="comment" required></textarea>
+                <input name="review_id" type="hidden" value={{ review.id }}>
+                <input type="submit" value="Post comment">
+            </form>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endfor %}

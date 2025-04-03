@@ -1,6 +1,7 @@
 from db import db
 from sqlalchemy.sql import text
 
+
 def add(user_id, review_id, comment):
     try:
         sql = text(
@@ -20,6 +21,6 @@ def remove(comment_id):
 
 
 def get_list():
-    sql = text("SELECT comments.user_id, comments.review_id, comment FROM comments ")
+    sql = text("SELECT comments.user_id, users.username, comments.review_id, comment FROM comments, users WHERE comments.user_id=users.id")
     result = db.session.execute(sql)
     return result.fetchall()

@@ -17,7 +17,7 @@
             <a href="/login" class="button">Login</a>
             {% endif %}
             <a href="/register" class="button">Register</a>
-            <a href="/review" class="button">Reviews</a>        
+            <a href="/review" class="button">Reviews</a>
         </div>
         <h1>Tsoha-film </h1>
         <p>Film reviews </p>
@@ -35,11 +35,9 @@
         {% endwith %}
     </div>
     <div class="content">
-        <hr>
         {% if session.user_id %}
         {% block content %}{% endblock %}
         {% endif %}
         {% block public %}{% endblock %}
-        <hr>
     </div>
 </body>
