@@ -36,7 +36,7 @@
             <div class="right">
                 <div class="byUser">
                     <b>By user:</b> {{ review[2] }}
-                    <img src="/image/{{review[1]}}" style="width:128px;height:128px;"
+                    <img src="/image/{{ review[1] }}" style="width:128px;height:128px;"
                         onError="this.src ='/static/images/default.jpg'">
                 </div>
             </div>
@@ -44,12 +44,12 @@
         <div class="comments">
             <b>Comments</b>
             {% for comment in comments %}
-            {% if comment.review_id == review[0] %}
+            {% if comment[2] == review[0] %}
             <br>
             <div class="flex-container-column comment">
                 <div class="byUser">
                     <b>User:</b> {{ comment[1] }}
-                    <img src="/image/{{comment[0]}}" style="width:128px;height:128px;"
+                    <img src="/image/{{ comment[0] }}" style="width:128px;height:128px;"
                         onError="this.src ='/static/images/default.jpg'">
                 </div>
                 <div>
@@ -63,7 +63,7 @@
             <form action="/comment" method="POST">
                 <p>Add comment:<br></p>
                 <textarea name="comment" required></textarea>
-                <input name="review_id" type="hidden" value={{ review.id }}>
+                <input name="review_id" type="hidden" value="{{ review[0] }}">
                 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 <input type="submit" value="Post comment">
             </form>
