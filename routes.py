@@ -92,7 +92,6 @@ def comment():
     try:
         review_id = request.form["review_id"]
         comment = request.form["comment"]
-        print(review_id)
         if not comment:
             raise Exception("Form must be filled")
         if comments.add(users.user_id(), review_id, comment):
@@ -107,7 +106,7 @@ def comment():
 
 @app.route("/profile", methods=["GET"])
 def profile():
-    return render_template("profile.html", username=users.get_name(users.get_id()))
+    return render_template("profile.html", username=users.get_name(users.get_id()), userid=users.get_id())
 
 
 @app.route("/picture", methods=["POST"])
@@ -127,8 +126,8 @@ def picture():
         flash(str(error))
     return redirect("/profile")
 
-@app.route("/show/<int:id>")
-def show(id):
+@app.route("/image/<int:id>")
+def image(id):
     try:
         data = users.get_profile_picture(id)
         response = make_response(bytes(data))

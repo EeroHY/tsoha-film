@@ -49,15 +49,6 @@ body {
   display: inline-block;
 }
 
-form {
-  max-width: 35em;
-  grid-template-columns: 5em 10em;
-  grid-row-gap: .3em;
-  border-radius: 25px;
-  border: 2px solid black;
-  padding: 20px;
-}
-
 input[type="text"] {
   width: 95%;
   padding: 5px;
@@ -90,4 +81,14 @@ input[type="submit"]:hover {
   padding: 20px;
   border-radius: 25px;
   border: 2px solid black;
+}
+
+.flex-container {
+  display: flex;
+  max-width: 35em;
+  grid-template-columns: 5em 10em;
+  grid-row-gap: .3em;
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
 }
