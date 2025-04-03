@@ -10,6 +10,7 @@
         <p>New username:<br>
             <input type="text" name="username">
         </p>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="submit" value="Change">
     </form>
 </div>
@@ -20,6 +21,7 @@
         <p>New password:<br>
             <input type="text" name="password">
         </p>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="submit" value="Change">
     </form>
 </div>
@@ -31,6 +33,7 @@
             <p>File:<br>
                 <input type="file" name="file">
             </p>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="submit" value="Change">
         </form>
     </div>

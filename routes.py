@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect, flash, make_response
+from flask import render_template, request, redirect, flash, make_response, session
 from sqlalchemy.sql import text
 import users, reviews, comments
 
@@ -57,6 +57,7 @@ def register():
             flash(str(error))
         return render_template("register.html")
 
+
 @app.route("/review", methods=["GET", "POST"])
 def review():
     if request.method == "GET":
@@ -72,6 +73,8 @@ def review():
             return redirect("/")
     if request.method == "POST":
         try:
+            if session["csrf_token"] != request.form["csrf_token"]:
+                raise PermissionError
             title = request.form["title"]
             review = request.form["review"]
             stars = request.form["stars"]
@@ -90,6 +93,8 @@ def review():
 @app.route("/comment", methods=["POST"])
 def comment():
     try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            raise PermissionError
         review_id = request.form["review_id"]
         comment = request.form["comment"]
         if not comment:
@@ -106,18 +111,22 @@ def comment():
 
 @app.route("/profile", methods=["GET"])
 def profile():
-    return render_template("profile.html", username=users.get_name(users.get_id()), userid=users.get_id())
+    return render_template(
+        "profile.html", username=users.get_name(users.get_id()), userid=users.get_id()
+    )
 
 
 @app.route("/picture", methods=["POST"])
 def picture():
     try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            raise PermissionError
         file = request.files["file"]
         name = file.filename
         if not name.endswith(".jpg"):
             raise Exception("Invalid filename")
         data = file.read()
-        if len(data) > 1000*1024:
+        if len(data) > 1000 * 1024:
             raise Exception("File too big")
         users.set_profile_picture(data)
 
@@ -125,6 +134,7 @@ def picture():
         print(str(error))
         flash(str(error))
     return redirect("/profile")
+
 
 @app.route("/image/<int:id>")
 def image(id):
@@ -135,4 +145,4 @@ def image(id):
         return response
     except Exception as error:
         print(str(error))
-        flash(str(error))    
+        flash(str(error))
