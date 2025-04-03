@@ -50,12 +50,12 @@ body {
 }
 
 input[type="text"] {
-  width: 95%;
+  width: 63%;
   padding: 5px;
 }
 
 input[type="password"] {
-  width: 95%;
+  width: 63%;
   padding: 5px;
 }
 
@@ -70,15 +70,19 @@ input[type="submit"]:hover {
   color: white;
 }
 
+textarea {
+  width: 63%;
+  height: 100px;
+}
+
 .content {
-  padding: 20px;
 }
 
 .form {
   padding: 20px;
   max-width: 100%;
   border-radius: 25px;
-  border: 2px solid black;
+  background: rgb(193, 187, 187);
 }
 
 .review {
@@ -91,14 +95,14 @@ input[type="submit"]:hover {
 .comments {
   padding: 10px;
   border-radius: 25px;
-  border: 2px solid black;
+  background: rgb(193, 187, 187);
   max-width: 63%;
 }
 
 
 .comment {
   border-radius: 25px;
-  border: 2px solid black;
+  background: rgb(181, 176, 176);
   padding: 20px;
 }
 
@@ -121,4 +125,23 @@ img {
   border: 2px solid black;
   display: block;
   margin-left: auto;
+}
+
+.byUser {
+  border-radius: 25px;
+  max-width: 20em;
+  background: rgb(168, 164, 164);
+}
+
+.left {
+  width: 50%;
+  
+}
+
+.right {
+  width: 50%;
+}
+
+div {
+  padding: 10px;
 }

@@ -20,7 +20,7 @@ def login():
             if not username or not password:
                 raise Exception("Form must be filled")
             if users.login(username, password):
-                return redirect("/")
+                return redirect("/profile")
             else:
                 raise Exception("User not found")
     except Exception as error:

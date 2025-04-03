@@ -23,7 +23,7 @@ def remove(review_id):
 def get_list():
     try:
         sql = text(
-            "SELECT reviews.id, users.username, reviews.title, reviews.stars, reviews.review FROM reviews, users "
+            "SELECT reviews.id, users.id, users.username, reviews.title, reviews.stars, reviews.review FROM reviews, users "
             "WHERE reviews.user_id=users.id ORDER BY reviews.id"
         )
         result = db.session.execute(sql)
