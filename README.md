@@ -2,18 +2,28 @@
 ## A web application for film reviews.
 ### Made for hy-tsoha course.
 
-Planned features:
+Features:
 
 - User account registration
 - Registered users can write film reviews and give them stars
 - Users can edit their own reviews
-- Users can choose whether to publish the review or not
-- Front page shows all published reviews from all users, even without registration
+- Reviews page shows all published reviews from all users, even without registration
 - Registered users can comment on other users' reviews
-- Admin user can remove reviews and comments  
+- Users can set a profile picture
 
 ### Usage:
-You need to have PostgreSQL up and running to use this app. The included Dockerfile can be used for this, see Docker/Usage.md for more.
+Docker usage:
+0. You need Docker and Docker compose.
+1. Clone this repository and `cd` into it.
+2. Create the SECRET_KEY environmental variable in docker-compose.yml
+3. Run 
+```
+sudo docker compose up
+```
+4. The app is now available at localhost:5000.
+
+Manual usage:
+0. You need to have PostgreSQL up and running.
 1. Clone this repository and `cd` into it.
 2. Create a python venv and install dependencies (note: this app requires Python version 3.12, otherwise it might not work):
 ```
@@ -25,13 +35,11 @@ pip install -r ./requirements.txt
 ```
 psql < schema.sql
 ```
-Alternatively use the included Dockerfile that does this.
 
 4. Create a file called `.env` and add the following:
 ```
 DATABASE_URL=postgresql:///tsoha_film
 SECRET_KEY=<SOME SECRET KEY HERE>
 ```
-Again, some differences if you use Docker.
 
-5. Now the app can be started with `flask run`
+5. Now the app can be started with `flask run`. The app will be available at localhost:5000.

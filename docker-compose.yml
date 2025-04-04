@@ -1,0 +1,25 @@
+# Use postgres/example user/password credentials
+services:
+  db-tsoha:
+    build: ./Docker/database
+    shm_size: 128mb
+    network_mode: host
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: tsoha-film
+  
+  adminer:
+    image: adminer
+    network_mode: host
+
+  tsoha-film:
+    build: 
+     context: .
+     dockerfile: ./Docker/python/Dockerfile
+    network_mode: host 
+    environment:
+      DATABASE_URL: postgresql://admin@localhost:5432/tsoha-film
+      SECRET_KEY: <KEY HERE>
+    
+
