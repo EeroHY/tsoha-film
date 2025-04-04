@@ -44,6 +44,6 @@ def remove(comment_id):
 
 
 def get_list():
-    sql = text("SELECT comments.user_id, users.username, comments.review_id, comment FROM comments, users WHERE comments.user_id=users.id")
+    sql = text("SELECT comments.id, comments.user_id, users.username, comments.review_id, comment FROM comments, users WHERE comments.user_id=users.id")
     result = db.session.execute(sql)
     return result.fetchall()

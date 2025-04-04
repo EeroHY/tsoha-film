@@ -124,6 +124,21 @@ def comment():
         flash(str(error))
     return redirect("/review")
 
+@app.route("/delete_comment", methods=["POST"])
+def delete_comment():
+    try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            raise PermissionError
+        comment_id = request.form["comment_id"]
+        if comments.remove(comment_id):
+            flash("Deleted comment")
+            return redirect("/review")
+        else:
+            raise Exception("Failed to remove comment")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+
 
 @app.route("/profile", methods=["GET"])
 def profile():
