@@ -26,10 +26,12 @@ pip install -r ./requirements.txt
 psql < schema.sql
 ```
 Alternatively use the included Dockerfile that does this.
+
 4. Create a file called `.env` and add the following:
 ```
 DATABASE_URL=postgresql:///tsoha_film
 SECRET_KEY=<SOME SECRET KEY HERE>
 ```
 Again, some differences if you use Docker.
+
 5. Now the app can be started with `flask run`
