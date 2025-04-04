@@ -16,8 +16,31 @@ def add(user_id, review_id, comment):
         raise error
 
 
+def remove_by_review_id(review_id):
+    try:
+        sql = text(
+            "DELETE FROM comments WHERE comments.review_id=:review_id"
+        )
+        db.session.execute(
+            sql, {"review_id": review_id}
+        )
+        db.session.commit()
+        return True
+    except Exception as error:
+        raise error
+
 def remove(comment_id):
-    return False
+    try:
+        sql = text(
+            "DELETE FROM comments WHERE comments.id=:comment_id"
+        )
+        db.session.execute(
+            sql, {"comment_id": comment_id}
+        )
+        db.session.commit()
+        return True
+    except Exception as error:
+        raise error
 
 
 def get_list():

@@ -90,6 +90,22 @@ def review():
             return redirect("/review")
 
 
+@app.route("/delete_review", methods=["POST"])
+def delete_review():
+    try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            raise PermissionError
+        review_id = request.form["review_id"]
+        if comments.remove_by_review_id(review_id) and reviews.remove(review_id):
+            flash("Deleted review")
+            return redirect("/review")
+        else:
+            raise Exception("Failed to remove review")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+
+
 @app.route("/comment", methods=["POST"])
 def comment():
     try:
@@ -138,11 +154,10 @@ def picture():
 
 @app.route("/image/<int:id>")
 def image(id):
-    try:
-        data = users.get_profile_picture(id)
+    data = users.get_profile_picture(id)
+    if data:
         response = make_response(bytes(data))
         response.headers.set("Content-Type", "image/jpeg")
         return response
-    except Exception as error:
-        print(str(error))
-        flash(str(error))
+    else:
+        return None

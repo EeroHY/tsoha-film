@@ -17,7 +17,17 @@ def add(user_id, title, review, stars):
 
 
 def remove(review_id):
-    return False
+    try:
+        sql = text(
+            "DELETE FROM reviews WHERE reviews.id=:review_id"
+        )
+        db.session.execute(
+            sql, {"review_id": review_id}
+        )
+        db.session.commit()
+        return True
+    except Exception as error:
+        raise error
 
 
 def get_list():

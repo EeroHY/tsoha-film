@@ -67,8 +67,15 @@
                 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                 <input type="submit" value="Post comment">
             </form>
-            {% endif %}
+            {% endif %}           
         </div>
+        {% if session.user_id == review[1] %}
+            <form action="/delete_review" method="POST">
+                <input name="review_id" type="hidden" value="{{ review[0] }}">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                <input type="submit" value="Delete review" onclick="return confirm('Are you sure?')" >
+            </form>
+        {% endif %}
     </div>
 </div>
 {% endfor %}
