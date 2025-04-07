@@ -13,6 +13,7 @@ Features:
 
 ### Usage:
 Docker usage:
+
 0. You need Docker and Docker compose.
 1. Clone this repository and `cd` into it.
 2. Create the SECRET_KEY environmental variable in docker-compose.yml
@@ -23,6 +24,7 @@ sudo docker compose up
 4. The app is now available at localhost:5000.
 
 Manual usage:
+
 0. You need to have PostgreSQL up and running.
 1. Clone this repository and `cd` into it.
 2. Create a python venv and install dependencies (note: this app requires Python version 3.12, otherwise it might not work):
