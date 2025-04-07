@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
 import secrets
 
+
 def login(username, password):
     try:
         sql = text("SELECT id, password FROM users WHERE username=:username")
@@ -25,7 +26,7 @@ def login(username, password):
 
 def logout():
     del session["user_id"]
-
+    del session["csrf_token"]
 
 def register(username, password):
     hash_value = generate_password_hash(password)
@@ -56,6 +57,33 @@ def get_name(id):
         return row.username
     return None
 
+def set_name(id, new_name):
+    try:
+        sql = text("UPDATE users SET username=:new_name WHERE id=:id")
+        db.session.execute(sql, {"new_name": new_name, "id": id})
+        db.session.commit()
+        return True
+    except Exception as error:
+        raise error
+
+def get_password(id):
+    sql = text("SELECT password FROM users WHERE id=:id")
+    result = db.session.execute(sql, {"id": id})
+    row = result.fetchone()
+    db.session.commit()
+    if row:
+        return row.password
+    return None
+
+def set_password(id, new_password):
+    try:
+        hash_value = generate_password_hash(new_password)
+        sql = text("UPDATE users SET password=:hash_value WHERE id=:id")
+        db.session.execute(sql, {"hash_value": hash_value, "id": id})
+        db.session.commit()
+        return True
+    except Exception as error:
+        raise error
 
 def user_exists(username):
     sql = text("SELECT username FROM users WHERE username=:username")
@@ -66,17 +94,28 @@ def user_exists(username):
         return True
     return False
 
+
 def set_profile_picture(data):
-    sql = text("DELETE FROM images WHERE user_id=:user_id")
-    db.session.execute(sql, {"user_id":get_id()})
-    db.session.commit()
-    sql = text("INSERT INTO images (user_id,data) VALUES (:user_id,:data)")
-    db.session.execute(sql, {"user_id":get_id(), "data":data})
-    db.session.commit()
+    try:
+        sql = text("DELETE FROM images WHERE user_id=:user_id")
+        db.session.execute(sql, {"user_id": get_id()})
+        db.session.commit()
+        sql = text("INSERT INTO images (user_id,data) VALUES (:user_id,:data)")
+        db.session.execute(sql, {"user_id": get_id(), "data": data})
+        db.session.commit()
+    except Exception as error:
+        raise error
+
 
 def get_profile_picture(id):
-    sql = text("SELECT data FROM images WHERE user_id=:id")
-    result = db.session.execute(sql, {"id":id})
-    data = result.fetchone()[0]    
-    db.session.commit()
-    return data
+    try:
+        sql = text("SELECT data FROM images WHERE user_id=:id")
+        result = db.session.execute(sql, {"id": id})
+        data = result.fetchone()
+        db.session.commit()
+        if data is None:
+            raise Exception("Image doesn't exist")
+        else:
+            return data[0]
+    except Exception as error:
+        raise error

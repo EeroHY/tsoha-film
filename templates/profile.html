@@ -6,9 +6,9 @@
 {% endif %}
 <div class="form">
     <p>Change username:</p>
-    <form action="/edit_user_name" method="POST">
+    <form action="/change_username" method="POST">
         <p>New username:<br>
-            <input type="text" name="username">
+            <input type="text" name="new_name">
         </p>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="submit" value="Change">
@@ -17,10 +17,17 @@
 
 <div class="form">
     <p>Change password:</p>
-    <form action="/edit_user_password" method="POST">
-        <p>New password:<br>
-            <input type="text" name="password">
+    <form action="/change_password" method="POST">
+        <p>Old password:<br>
+            <input type="text" name="old_password">
         </p>
+        <p>New password:<br>
+            <input type="text" name="new_password1">
+        </p>
+        <p>New password again:<br>
+            <input type="text" name="new_password2">
+        </p> 
+        <input type="hidden" name="username" value={{ username }}>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="submit" value="Change">
     </form>
@@ -29,7 +36,7 @@
 <div class="flex-container form">
     <div class="change-picture">
         <p>Change profile picture:</p>
-        <form action="/picture" method="POST" enctype="multipart/form-data">
+        <form action="/change_picture" method="POST" enctype="multipart/form-data">
             <p>File:<br>
                 <input type="file" name="file">
             </p>

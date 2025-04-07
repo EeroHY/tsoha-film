@@ -32,6 +32,7 @@ def login():
 @app.route("/logout")
 def logout():
     users.logout()
+    flash("Logged out")
     return redirect("/")
 
 
@@ -124,6 +125,7 @@ def comment():
         flash(str(error))
     return redirect("/review")
 
+
 @app.route("/delete_comment", methods=["POST"])
 def delete_comment():
     try:
@@ -138,6 +140,7 @@ def delete_comment():
     except Exception as error:
         print(str(error))
         flash(str(error))
+        return redirect("/review")
 
 
 @app.route("/profile", methods=["GET"])
@@ -147,7 +150,47 @@ def profile():
     )
 
 
-@app.route("/picture", methods=["POST"])
+@app.route("/change_username", methods=["POST"])
+def change_username():
+    try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            raise PermissionError
+        new_name = request.form["new_name"]
+        if users.set_name(users.get_id(), new_name):
+            flash("Name changed successfully!")
+            return redirect("/profile")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/profile")
+
+
+@app.route("/change_password", methods=["POST"])
+def change_password():
+    try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            raise PermissionError
+        username = request.form["username"]
+        old_password = request.form["old_password"]
+        new_password1 = request.form["new_password1"]
+        new_password2 = request.form["new_password2"]
+        if not username or not old_password or not new_password1 or not new_password2:
+            raise Exception("Form must be filled")
+        if new_password1 != new_password2:
+            raise Exception("Passwords are different")
+        if users.login(username, old_password):    
+            if users.set_password(users.get_id(), new_password1):
+                flash("Password changed successfully!")
+                return redirect("/profile")
+        else:
+            raise Exception("Wrong password")
+    except Exception as error:
+        print(str(error))
+        flash(str(error))
+        return redirect("/profile")
+
+
+@app.route("/change_picture", methods=["POST"])
 def picture():
     try:
         if session["csrf_token"] != request.form["csrf_token"]:
