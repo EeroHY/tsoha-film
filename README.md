@@ -45,3 +45,7 @@ SECRET_KEY=<SOME SECRET KEY HERE>
 ```
 
 5. Now the app can be started with `flask run`. The app will be available at localhost:5000.
+
+Credits:
+Stars images: [Yasir72.multan](https://commons.wikimedia.org/wiki/File:Star_rating_1_of_5.png)
+Default profile image: [Paulo Selke](https://commons.wikimedia.org/wiki/File:Unknown_person.jpg)

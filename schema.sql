@@ -8,7 +8,8 @@ CREATE TABLE reviews (
     user_id INTEGER REFERENCES users,
     title TEXT, 
     review TEXT, 
-    stars INTEGER
+    stars INTEGER,
+    date TIMESTAMP
 );
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY, 
