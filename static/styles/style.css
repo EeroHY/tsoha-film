@@ -2,7 +2,7 @@ body {
   margin: auto;
   font-family: 'Helvetica', sans-serif;
   color: rgb(34, 34, 34);
-  background: rgb(199, 194, 194);
+  background: rgb(247, 240, 245);
   width: 38%;
   min-width: 25em;
   margin: 0 auto;
@@ -16,7 +16,7 @@ body {
   padding: 1em 1em;
   font-size: 2em;
   border-radius: 25px;
-  border: 2px solid black;
+  border: 2px solid rgb(67, 54, 51);
   line-height: 1em;
 }
 
@@ -24,7 +24,7 @@ body {
   width: fit-content;
   padding: 0px;
   border-radius: 25px;
-  border: 2px solid black;
+  border: 2px solid rgb(67, 54, 51);
 }
 
 .header .menu a {
@@ -62,11 +62,12 @@ input[type="password"] {
 input[type="submit"] {
   padding: 5px;
   text-align: center;
-  background: rgb(76, 141, 98);
+  color: white;
+  background: rgb(92, 85, 82);
 }
 
 input[type="submit"]:hover {
-  background: rgb(49, 90, 63);
+  background: rgb(72, 65, 62);
   color: white;
 }
 
@@ -75,34 +76,36 @@ textarea {
   height: 100px;
 }
 
-.content {
-}
-
 .form {
   padding: 20px;
   max-width: 100%;
+}
+
+.profile {
   border-radius: 25px;
-  background: rgb(193, 187, 187);
+  background: rgb(216, 247, 147);
+  border: 2px solid rgb(67, 54, 51);
 }
 
 .review {
   padding: 20px;
   max-width: 100%;
   border-radius: 25px;
-  border: 2px solid black;
+  border: 2px solid rgb(67, 54, 51);
+  background: rgb(216, 247, 147);
 }
 
 .comments {
   padding: 10px;
   border-radius: 25px;
-  background: rgb(193, 187, 187);
+  background: rgb(216, 247, 147);
   max-width: 63%;
 }
 
 
 .comment {
   border-radius: 25px;
-  background: rgb(181, 176, 176);
+  background: rgb(203, 233, 139);
   padding: 20px;
 }
 
@@ -122,7 +125,7 @@ textarea {
 }
 
 img {
-  border: 2px solid black;
+  border: 2px solid rgb(67, 54, 51);
   display: block;
   margin-left: auto;
 }
@@ -130,7 +133,7 @@ img {
 .byUser {
   border-radius: 25px;
   max-width: 20em;
-  background: rgb(168, 164, 164);
+  background: rgb(216, 247, 147);
 }
 
 .left {

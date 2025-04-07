@@ -6,10 +6,10 @@ Features:
 
 - User account registration
 - Registered users can write film reviews and give them stars
-- Users can edit their own reviews
-- Reviews page shows all published reviews from all users, even without registration
 - Registered users can comment on other users' reviews
-- Users can set a profile picture
+- Users can remove their own reviews and comments
+- Reviews page shows all published reviews from all users, even without registration
+- Users can set a profile picture and change their username and password
 
 ### Usage:
 Docker usage:
