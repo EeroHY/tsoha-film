@@ -28,6 +28,7 @@ def logout():
     del session["user_id"]
     del session["csrf_token"]
 
+
 def register(username, password):
     hash_value = generate_password_hash(password)
     try:
@@ -57,6 +58,7 @@ def get_name(id):
         return row.username
     return None
 
+
 def set_name(id, new_name):
     try:
         sql = text("UPDATE users SET username=:new_name WHERE id=:id")
@@ -65,6 +67,7 @@ def set_name(id, new_name):
         return True
     except Exception as error:
         raise error
+
 
 def get_password(id):
     sql = text("SELECT password FROM users WHERE id=:id")
@@ -75,6 +78,7 @@ def get_password(id):
         return row.password
     return None
 
+
 def set_password(id, new_password):
     try:
         hash_value = generate_password_hash(new_password)
@@ -84,6 +88,7 @@ def set_password(id, new_password):
         return True
     except Exception as error:
         raise error
+
 
 def user_exists(username):
     sql = text("SELECT username FROM users WHERE username=:username")

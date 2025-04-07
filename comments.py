@@ -18,25 +18,18 @@ def add(user_id, review_id, comment):
 
 def remove_by_review_id(review_id):
     try:
-        sql = text(
-            "DELETE FROM comments WHERE comments.review_id=:review_id"
-        )
-        db.session.execute(
-            sql, {"review_id": review_id}
-        )
+        sql = text("DELETE FROM comments WHERE comments.review_id=:review_id")
+        db.session.execute(sql, {"review_id": review_id})
         db.session.commit()
         return True
     except Exception as error:
         raise error
 
+
 def remove(comment_id):
     try:
-        sql = text(
-            "DELETE FROM comments WHERE comments.id=:comment_id"
-        )
-        db.session.execute(
-            sql, {"comment_id": comment_id}
-        )
+        sql = text("DELETE FROM comments WHERE comments.id=:comment_id")
+        db.session.execute(sql, {"comment_id": comment_id})
         db.session.commit()
         return True
     except Exception as error:
@@ -44,6 +37,8 @@ def remove(comment_id):
 
 
 def get_list():
-    sql = text("SELECT comments.id, comments.user_id, users.username, comments.review_id, comment FROM comments, users WHERE comments.user_id=users.id")
+    sql = text(
+        "SELECT comments.id, comments.user_id, users.username, comments.review_id, comment FROM comments, users WHERE comments.user_id=users.id"
+    )
     result = db.session.execute(sql)
     return result.fetchall()

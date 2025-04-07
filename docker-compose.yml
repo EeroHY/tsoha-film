@@ -7,10 +7,6 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: example
       POSTGRES_DB: tsoha-film
-  
-  adminer:
-    image: adminer
-    network_mode: host
 
   tsoha-film:
     build: 
